@@ -36,24 +36,21 @@
   </div>
 
 </header>
-
-
 <section class="colecciones">
-  <button onclick="filtrarColeccion('todas')">Todas</button>
-  <button onclick="filtrarColeccion('Salsa Caleña')">Salsa Caleña</button>
-  <button onclick="filtrarColeccion('DSC')">Diciembre Social Club</button>
-  <button onclick="filtrarColeccion('El Amor Está en el Aire')">El Amor Está en el Aire</button>
-  <button onclick="mostrarEstudio()">Foxlab Estudio Creativo</button>
+  <button onclick="mostrarProductos('todas', this)" class="active">Todas</button>
+  <button onclick="mostrarProductos('salsa', this)">Salsa Caleña</button>
+  <button onclick="mostrarProductos('dsc', this)">Diciembre Social Club</button>
+  <button onclick="mostrarProductos('amor', this)">Hecho con amor</button>
 </section>
 
 
 <main>
   <div id="productos" class="grid-productos"></div>
 
-  <div class="paginacion">
-    <button onclick="paginaAnterior()">Anterior</button>
-    <span id="paginaActual">1</span>
-    <button onclick="paginaSiguiente()">Siguiente</button>
+  <div class="paginacion" id="paginacion">
+    <button id="btnAnterior" onclick="paginaAnterior()">Anterior</button>
+    <span id="infoPagina">Página 1 de 1</span>
+    <button id="btnSiguiente" onclick="paginaSiguiente()">Siguiente</button>
   </div>
 </main>
 

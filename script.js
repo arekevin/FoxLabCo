@@ -13,28 +13,20 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let paginaActual = 1;
 const productosPorPagina = 8;
 
-
 /* ============================= */
 /* UTILIDADES */
 /* ============================= */
 
-const formatoPrecio = num => `$${num.toLocaleString()}`;
+const $ = id => document.getElementById(id);
+const formatoPrecio = num => `$${Number(num).toLocaleString()}`;
 
 function guardarCarrito() {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-function mostrarToast() {
-  const toast = document.getElementById("toast");
-  if (!toast) return;
-
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2000);
+function limpiarTexto(texto) {
+  return texto?.trim().toLowerCase();
 }
-
 
 /* ============================= */
 /* CARGAR PRODUCTOS */
@@ -42,9 +34,9 @@ function mostrarToast() {
 
 async function fetchProductos() {
   const res = await fetch(sheetURL);
-  const csvText = await res.text();
+  const csv = await res.text();
 
-  const lines = csvText.trim().split("\n");
+  const lines = csv.trim().split("\n");
   const headers = lines.shift().split(",");
 
   return lines.map((line, index) => {
@@ -56,47 +48,66 @@ async function fetchProductos() {
     });
 
     obj.id = index;
-    obj.Precio = parseInt(obj.Precio);
+    obj.Precio = parseInt(obj.Precio) || 0;
+    obj.Coleccion = limpiarTexto(obj.Coleccion);
 
     return obj;
   });
 }
 
-
 /* ============================= */
-/* MOSTRAR PRODUCTOS */
+/* FILTRO */
 /* ============================= */
 
-function mostrarProductos(coleccion = "todas") {
+function mostrarProductos(coleccion = "todas", boton = null) {
 
-  document.getElementById("estudioCreativo").style.display = "none";
+ document.getElementById("estudioCreativo").style.display = "none";
 
-  productosFiltrados = coleccion === "todas"
+  // 🔥 Manejar botón activo
+  if (boton) {
+    const botones = document.querySelectorAll(".colecciones button");
+    botones.forEach(btn => btn.classList.remove("active"));
+    boton.classList.add("active");
+  }
+
+  const slug = limpiarTexto(coleccion);
+
+  productosFiltrados = slug === "todas"
     ? productosGlobal
-    : productosGlobal.filter(p => p.Coleccion === coleccion);
+    : productosGlobal.filter(p => p.Coleccion === slug);
 
   paginaActual = 1;
   renderPagina();
 }
 
+/* ============================= */
+/* RENDER */
+/* ============================= */
+
 function renderPagina() {
 
   const cont = document.getElementById("productos");
+  const paginacion = document.getElementById("paginacion");
+  const btnAnterior = document.getElementById("btnAnterior");
+  const btnSiguiente = document.getElementById("btnSiguiente");
+  const infoPagina = document.getElementById("infoPagina");
+
   cont.innerHTML = "";
+
+  const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
 
   const inicio = (paginaActual - 1) * productosPorPagina;
   const fin = inicio + productosPorPagina;
-  const productosPagina = productosFiltrados.slice(inicio, fin);
 
-  productosPagina.forEach(p => {
+  productosFiltrados.slice(inicio, fin).forEach(p => {
 
     const card = document.createElement("div");
-    card.classList.add("card");
+    card.className = "card";
 
     card.innerHTML = `
       <img 
         src="https://res.cloudinary.com/${cloudName}/image/upload/w_600,q_auto,f_webp/${p.Imagen}" 
-        alt="${p.Nombre}"
+        alt="${p.Nombre}" 
         class="img-producto"
       >
       <h3>${p.Nombre}</h3>
@@ -108,16 +119,28 @@ function renderPagina() {
       .addEventListener("click", () => abrirModal(p.Imagen));
 
     card.querySelector(".btn-agregar")
-      .addEventListener("click", function () {
-        agregarAlCarrito(p, this);
-      });
+      .addEventListener("click", e => agregarAlCarrito(p, e.target));
 
     cont.appendChild(card);
   });
 
-  document.getElementById("paginaActual").textContent = paginaActual;
-}
+  /* ============================= */
+  /* CONTROL PAGINACIÓN PREMIUM */
+  /* ============================= */
 
+  if (totalPaginas <= 1) {
+    paginacion.style.display = "none";
+    return;
+  } else {
+    paginacion.style.display = "flex"; // o block según tu CSS
+  }
+
+  infoPagina.textContent = `Página ${paginaActual} de ${totalPaginas}`;
+
+  btnAnterior.disabled = paginaActual === 1;
+  btnSiguiente.disabled = paginaActual === totalPaginas;
+
+}
 
 /* ============================= */
 /* PAGINACIÓN */
@@ -139,44 +162,19 @@ function paginaAnterior() {
   }
 }
 
-
-/* ============================= */
-/* FILTROS */
-/* ============================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const botones = document.querySelectorAll(".colecciones button");
-
-  botones.forEach(boton => {
-    boton.addEventListener("click", () => {
-
-      botones.forEach(btn => btn.classList.remove("active"));
-      boton.classList.add("active");
-
-      mostrarProductos(boton.dataset.categoria);
-    });
-  });
-
-});
-
-
 /* ============================= */
 /* MODAL */
 /* ============================= */
 
-function abrirModal(imagenPublicId) {
-  const modal = document.getElementById("modalImagen");
-  const img = document.getElementById("imagenGrande");
-
-  img.src = `https://res.cloudinary.com/${cloudName}/image/upload/w_1200,q_auto,f_webp/${imagenPublicId}`;
-  modal.classList.add("activo");
+function abrirModal(imgId) {
+  $("imagenGrande").src =
+    `https://res.cloudinary.com/${cloudName}/image/upload/w_1200,q_auto,f_webp/${imgId}`;
+  $("modalImagen").classList.add("activo");
 }
 
 function cerrarModal() {
-  document.getElementById("modalImagen").classList.remove("activo");
+  $("modalImagen").classList.remove("activo");
 }
-
 
 /* ============================= */
 /* CARRITO */
@@ -186,36 +184,26 @@ function agregarAlCarrito(producto, boton) {
 
   const existente = carrito.find(p => p.id === producto.id);
 
-  if (existente) {
-    existente.cantidad++;
-  } else {
-    carrito.push({
-      id: producto.id,
-      Nombre: producto.Nombre,
-      Precio: producto.Precio,
-      Imagen: producto.Imagen,
-      cantidad: 1
-    });
-  }
+  existente
+    ? existente.cantidad++
+    : carrito.push({ ...producto, cantidad: 1 });
 
   guardarCarrito();
   actualizarCarritoUI();
-  mostrarToast();
+  animarBoton(boton);
+}
 
-  /* Animación botón */
-  if (boton) {
-    const textoOriginal = boton.innerText;
+function animarBoton(boton) {
+  if (!boton) return;
 
-    boton.classList.add("agregado");
-    boton.innerText = "Agregado ✓";
-    boton.disabled = true;
+  const texto = boton.innerText;
+  boton.innerText = "Agregado ✓";
+  boton.disabled = true;
 
-    setTimeout(() => {
-      boton.classList.remove("agregado");
-      boton.innerText = textoOriginal;
-      boton.disabled = false;
-    }, 1500);
-  }
+  setTimeout(() => {
+    boton.innerText = texto;
+    boton.disabled = false;
+  }, 1200);
 }
 
 function eliminarProducto(id) {
@@ -225,20 +213,15 @@ function eliminarProducto(id) {
 }
 
 function cambiarCantidad(id, cambio) {
-
   const item = carrito.find(p => p.id === id);
   if (!item) return;
 
   item.cantidad += cambio;
+  if (item.cantidad <= 0) eliminarProducto(id);
 
-  if (item.cantidad <= 0) {
-    eliminarProducto(id);
-  } else {
-    guardarCarrito();
-    actualizarCarritoUI();
-  }
+  guardarCarrito();
+  actualizarCarritoUI();
 }
-
 
 /* ============================= */
 /* UI CARRITO */
@@ -246,12 +229,11 @@ function cambiarCantidad(id, cambio) {
 
 function actualizarCarritoUI() {
 
-  const lista = document.getElementById("listaCarrito");
-  const contador = document.getElementById("contadorCarrito");
-  const totalSpan = document.getElementById("totalCarrito");
+  const lista = $("listaCarrito");
+  const contador = $("contadorCarrito");
+  const totalSpan = $("totalCarrito");
 
   lista.innerHTML = "";
-
   let total = 0;
   let totalItems = 0;
 
@@ -260,50 +242,40 @@ function actualizarCarritoUI() {
     total += item.Precio * item.cantidad;
     totalItems += item.cantidad;
 
-    const div = document.createElement("div");
-    div.classList.add("item-carrito");
-
-    div.innerHTML = `
-      <img src="https://res.cloudinary.com/${cloudName}/image/upload/w_200,q_auto,f_webp/${item.Imagen}" alt="${item.Nombre}">
-      
-      <div class="item-info">
-        <h4>${item.Nombre}</h4>
-        <div class="precio">${formatoPrecio(item.Precio * item.cantidad)}</div>
-
-        <div class="controles-cantidad">
-          <button onclick="cambiarCantidad(${item.id}, -1)">−</button>
-          <span>${item.cantidad}</span>
-          <button onclick="cambiarCantidad(${item.id}, 1)">+</button>
+    lista.innerHTML += `
+      <div class="item-carrito">
+        <img src="https://res.cloudinary.com/${cloudName}/image/upload/w_200,q_auto,f_webp/${item.Imagen}">
+        <div class="item-info">
+          <h4>${item.Nombre}</h4>
+          <div class="precio">${formatoPrecio(item.Precio * item.cantidad)}</div>
+          <div class="controles-cantidad">
+            <button onclick="cambiarCantidad(${item.id}, -1)">−</button>
+            <span>${item.cantidad}</span>
+            <button onclick="cambiarCantidad(${item.id}, 1)">+</button>
+          </div>
+          <button onclick="eliminarProducto(${item.id})">Eliminar</button>
         </div>
-
-        <button class="btn-eliminar" onclick="eliminarProducto(${item.id})">
-          Eliminar
-        </button>
       </div>
     `;
-
-    lista.appendChild(div);
   });
 
   contador.textContent = totalItems;
-  totalSpan.textContent = total.toLocaleString();
+  totalSpan.textContent = formatoPrecio(total);
 }
 
-
 /* ============================= */
-/* PANEL CARRITO */
+/* CARRITO PANEL */
 /* ============================= */
 
 function abrirCarrito() {
-  document.getElementById("carritoPanel").classList.add("activo");
-  document.getElementById("carritoOverlay").classList.add("activo");
+  $("carritoPanel").classList.add("activo");
+  $("carritoOverlay").classList.add("activo");
 }
 
 function cerrarCarrito() {
-  document.getElementById("carritoPanel").classList.remove("activo");
-  document.getElementById("carritoOverlay").classList.remove("activo");
+  $("carritoPanel").classList.remove("activo");
+  $("carritoOverlay").classList.remove("activo");
 }
-
 
 /* ============================= */
 /* WHATSAPP */
@@ -311,39 +283,35 @@ function cerrarCarrito() {
 
 function enviarPedidoWhatsApp() {
 
-  if (carrito.length === 0) {
-    alert("Tu carrito está vacío");
-    return;
-  }
+  if (!carrito.length) return alert("Tu carrito está vacío");
 
-  let mensaje = "Hola Foxlab Co 👋\n\nQuiero hacer el siguiente pedido:\n\n";
+  let mensaje = "Hola Foxlab Co 👋\n\nPedido:\n\n";
   let total = 0;
 
   carrito.forEach(item => {
-
     const subtotal = item.Precio * item.cantidad;
+    total += subtotal;
 
     mensaje += `• ${item.Nombre}\n`;
     mensaje += `  Cantidad: ${item.cantidad}\n`;
     mensaje += `  Subtotal: ${formatoPrecio(subtotal)}\n\n`;
-
-    total += subtotal;
   });
 
   mensaje += `Total: ${formatoPrecio(total)}\n\nMi nombre es:`;
 
-  const mensajeCodificado = encodeURIComponent(mensaje);
-  window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`, "_blank");
-// 🔥 VACIAR CARRITO DESPUÉS DE ENVIAR
+  window.open(
+    `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`,
+    "_blank"
+  );
+
   carrito = [];
-  localStorage.removeItem("carrito");
+  guardarCarrito();
   actualizarCarritoUI();
   cerrarCarrito();
 }
 
-
 /* ============================= */
-/* INICIALIZAR */
+/* INIT */
 /* ============================= */
 
 (async function init() {
@@ -352,7 +320,7 @@ function enviarPedidoWhatsApp() {
     productosFiltrados = [...productosGlobal];
     renderPagina();
     actualizarCarritoUI();
-  } catch (error) {
-    console.error("Error cargando productos:", error);
+  } catch (err) {
+    console.error("Error cargando productos:", err);
   }
 })();
