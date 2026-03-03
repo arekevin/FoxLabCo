@@ -531,7 +531,7 @@ body {
     height: 24px;
   }
 .grid-productos {
-  grid-template-columns:repeat(auto-fit, minmax(160px, 200px));
+  grid-template-columns:repeat(auto-fit, minmax(160px, 160px));
   justify-content: center;
   }
   .logo {
