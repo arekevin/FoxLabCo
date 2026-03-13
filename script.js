@@ -11,7 +11,7 @@ let productosFiltrados = [];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 let paginaActual = 1;
-const productosPorPagina = 8;
+const productosPorPagina = 10;
 
 /* ============================= */
 /* UTILIDADES */
