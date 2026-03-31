@@ -492,10 +492,14 @@ color:white;
 .hero h1{
 font-size:42px;
 letter-spacing:2px;
-
 opacity:0;
 transform:translateY(20px);
 animation:heroFade 1s forwards;
+}
+
+.heroimg img{
+  width: 100%;
+  position: relative;
 }
 
 .slogan{
@@ -511,7 +515,7 @@ animation:heroFade 1s .6s forwards;
 }
 
 .galeria{
-padding:80px 20px;
+padding:30px 20px;
 text-align:center;
 }
 
@@ -530,7 +534,7 @@ object-fit: cover;
 }
 
 .concepto{
-padding:80px 20px;
+padding:30px 20px;
 text-align:center;
 max-width:700px;
 margin:auto;
