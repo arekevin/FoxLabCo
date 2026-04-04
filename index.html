@@ -1,84 +1,111 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Foxlab Group</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
 </head>
 
-<body class="bodyhome">
+<body>
+
+<div class="container">
 
   <!-- HERO -->
   <section class="hero">
-
-    <img src="assets/logoh.png" alt="Logo Foxlab" class="logoh">
-
-    <h1>Foxlab Group</h1>
-    <p class="slogan">
-      The Creative Collective
-    </p>
-
-    <a href="catalogo.html" class="btn-entrar">
-      Ver catálogo
-    </a>
-
-  </section>
-  <div class="heroimg">
-    <img src="https://res.cloudinary.com/dvzdwcr5m/image/upload/hero1" alt="hero1">
-  </div>
-  <!-- GALERÍA -->
-  <section class="galeria">
-
-    <h2>Nuestras colecciones</h2>
-
-    <div class="carrusel">
-      <img src="https://res.cloudinary.com/dvzdwcr5m/image/upload/w_1200,q_auto,f_webp/womanbottle" alt="Colección 1">
-      <img src="https://res.cloudinary.com/dvzdwcr5m/image/upload/w_1200,q_auto,f_webp/paraiso" alt="Colección 2">
-      <img src="https://res.cloudinary.com/dvzdwcr5m/image/upload/w_1200,q_auto,f_webp/maslove" alt="Colección 3">
-      <img src="https://res.cloudinary.com/dvzdwcr5m/image/upload/w_1200,q_auto,f_webp/ausente" alt="Colección 4">
+    <div class="hero-content">
+      <h1>Diseña tu identidad.<br>Viste diferente.</h1>
+      <p>Foxlab Co. + selección curada de estilo, cultura y actitud.</p>
+      <a href="#" class="btn">Explorar colección</a>
     </div>
   </section>
-  <section class="galeria">
-    <h2>Foxlab Collection</h2>
-    <div class="carrusel">
-      <img src="https://res.cloudinary.com/dvzdwcr5m/image/upload/w_1200,q_auto,f_webp/kit1" alt="Colección 1">
-      <img src="https://res.cloudinary.com/dvzdwcr5m/image/upload/w_1200,q_auto,f_webp/scent1" alt="Colección 2">
-      <img src="https://res.cloudinary.com/dvzdwcr5m/image/upload/w_1200,q_auto,f_webp/set1" alt="Colección 3">
-      <img src="https://res.cloudinary.com/dvzdwcr5m/image/upload/w_1200,q_auto,f_webp/scent2" alt="Colección 4">
+
+  <!-- CATEGORÍAS -->
+  <section>
+    <h2 class="section-title">Explora nuestras categorías</h2>
+
+    <div class="categories-grid">
+
+      <div class="card big">
+        <img src="assets/foxlab.png">
+        <span>Foxlab Co.</span>
+      </div>
+
+      <div class="card small">
+        <img src="assets/tshirt.png">
+        <span>Fox Custom Lab</span>
+      </div>
+
+      <div class="card small">
+        <img src="assets/pants.png">
+        <span>Pantalones</span>
+      </div>
+
+      <div class="card small">
+        <img src="assets/shoes.png">
+        <span>Calzado</span>
+      </div>
+
+      <div class="card small">
+        <img src="assets/scent.png">
+        <span>Fragancias</span>
+      </div>
+
+      <div class="card horizontal">
+        <img src="assets/underwear.png">
+        <span>Esenciales</span>
+      </div>
+
     </div>
   </section>
-  <!-- CONCEPTO -->
-  <section class="concepto">
 
-    <h2>Foxlab Group®</h2>
-
-    <p>
-      FoxLab Group es un holding multicanal dedicado a la intersección del diseño, la moda urbana y la personalización, operando a través de sus divisiones Co, Custom, Essentials y Sport.
-    </p>
-
+  <!-- BLOQUE MARCA -->
+  <section class="brand">
+    <div class="brand-text">
+      <h2>Foxlab Co. la marca</h2>
+      <p>No seguimos tendencias. Las creamos. Es diseño, cultura y actitud en cada prenda.</p>
+      <a href="#" class="btn">Ver colección Foxlab</a>
+    </div>
+    <img src="assets/model.png">
   </section>
 
+  <!-- PRODUCTOS -->
+  <section>
+    <h2 class="section-title">Selección Foxlab</h2>
 
-  <!-- CTA -->
-  <section class="cta">
+    <div class="grid products">
 
-    <h2>Descubre la colección</h2>
+      <div class="product">
+        <img src="assets/perfume.png">
+        <p>Fragancia premium</p>
+      </div>
 
-    <a href="catalogo.html" class="btn-entrar grande">
-      Ver catálogo completo
-    </a>
+      <div class="product">
+        <img src="assets/shirt2.png">
+        <p>Camiseta edición</p>
+      </div>
 
+      <div class="product">
+        <img src="assets/pants2.png">
+        <p>Pantalón cargo</p>
+      </div>
+
+      <div class="product">
+        <img src="assets/underwear.png">
+        <p>Ropa interior</p>
+      </div>
+
+    </div>
   </section>
 
+</div>
 
-  <footer>
-    <p>© 2026 Foxlab Co</p>
-  </footer>
-
-  <script src="home.js"></script>
+<footer>
+  © 2026 Foxlab Group
+</footer>
 
 </body>
-
 </html>
