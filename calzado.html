@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Catálogo Calzado</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stylescz.css">
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+<header class="header">
+
+  <a href="index.html" class="header-left">
+    <img src="assets/logoh.png" alt="Logo FoxLab Co." class="logo">
+  </a>
+
+  <div class="header-center">
+    <h1>FoxLab Co.</h1>
+  </div>
+
+  <div class="header-right">
+
+    <a href="https://instagram.com/foxlabco/" target="_blank">
+      <img src="assets/instagram.png" alt="Instagram">
+    </a>
+
+    <a href="https://wa.me/573126161008" target="_blank">
+      <img src="assets/whatsapp.png" alt="WhatsApp">
+    </a>
+
+  </div>
+
+</header>
+
+<div class="filtros">
+  <select id="filtroCategoria">
+    <option value="todos">Todas las categorías</option>
+    <option value="Zapatos">Zapatos</option>
+    <option value="Camisetas">Camisetas</option>
+  </select>
+
+  <select id="filtroMarca">
+    <option value="todos">Todas las marcas</option>
+  </select>
+
+  <select id="filtroGenero">
+    <option value="todos">Todos los géneros</option>
+    <option value="Hombre">Hombre</option>
+    <option value="Dama">Dama</option>
+    <option value="Unisex">Unisex</option>
+  </select>
+</div>
+<main>
+  <div id="productos" class="grid-productos"></div>
+
+  <div class="paginacion" id="paginacion">
+    <button id="btnAnterior" onclick="paginaAnterior()">Anterior</button>
+    <span id="infoPagina">Página 1 de 1</span>
+    <button id="btnSiguiente" onclick="paginaSiguiente()">Siguiente</button>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <h1>FoxLab Co.</h1>
+    <p>© Todos los derechos reservados.</p>
+    <a href="https://wa.me/573126161008?text=Hola%20Foxlab%20👋%20quiero%20mi%20página%20web" class="credito">Website desarrollado por Foxlab Studio</a>
+  </div>
+</footer>
+<script src="scriptcz.js"></script>
+</body>
+</html>

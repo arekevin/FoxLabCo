@@ -35,9 +35,14 @@ function limpiarTexto(texto) {
   return texto?.trim().toLowerCase();
 }
 
+function obtenerCategoriaDesdeURL() {
+  const params = new URLSearchParams(window.location.search);
+  return limpiarTexto(params.get("categoria"));
+}
+
 /* cerrar modal al hacer click fuera */
-$("modalImagen").addEventListener("click", function(e){
-  if(e.target.id === "modalImagen"){
+$("modalImagen").addEventListener("click", function (e) {
+  if (e.target.id === "modalImagen") {
     cerrarModal();
   }
 });
@@ -187,8 +192,8 @@ function cerrarModal() {
 }
 
 function obtenerNombreImagen() {
-  return indexImagen === 0 
-    ? imagenBase 
+  return indexImagen === 0
+    ? imagenBase
     : `${imagenBase}${indexImagen}`;
 }
 
@@ -389,9 +394,27 @@ function enviarPedidoWhatsApp() {
 (async function init() {
   try {
     productosGlobal = await fetchProductos();
-    productosFiltrados = [...productosGlobal];
-    renderPagina();
+
+    const categoriaURL = obtenerCategoriaDesdeURL();
+
+    if (categoriaURL && categoriaURL !== "todas") {
+      mostrarProductos(categoriaURL);
+      const botones = document.querySelectorAll(".colecciones button");
+
+      botones.forEach(btn => {
+        btn.classList.remove("active");
+
+        if (limpiarTexto(btn.textContent).includes(categoriaURL)) {
+          btn.classList.add("active");
+        }
+      });
+    } else {
+      productosFiltrados = [...productosGlobal];
+      renderPagina();
+    }
+
     actualizarCarritoUI();
+
   } catch (err) {
     console.error("Error cargando productos:", err);
   }

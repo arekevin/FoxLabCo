@@ -259,12 +259,24 @@
     }
 
     /* CARDS */
+
+    .categories-grid .card {
+      transition: all .4s ease;
+    }
+
+    .categories-grid .card:hover {
+      transform: scale(1.02);
+    }
+
     .card {
       position: relative;
       border-radius: 20px;
       overflow: hidden;
       background: #161616;
       cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
 
     .card img {
