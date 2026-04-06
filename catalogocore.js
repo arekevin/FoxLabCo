@@ -387,4 +387,11 @@ function iniciarCatalogo(config) {
     }
   })();
   window.mostrarProductos = mostrarProductos;
+  window.paginaSiguiente = paginaSiguiente;
+  window.paginaAnterior = paginaAnterior;
+  window.abrirCarrito = abrirCarrito;
+  window.cerrarCarrito = cerrarCarrito;
+  window.cambiarCantidad = cambiarCantidad;
+  window.eliminarProducto = eliminarProducto;
+  window.enviarPedidoWhatsApp = enviarPedidoWhatsApp;
 }
