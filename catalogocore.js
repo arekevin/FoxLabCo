@@ -386,4 +386,5 @@ function iniciarCatalogo(config) {
       console.error("Error cargando productos:", err);
     }
   })();
+  window.mostrarProductos = mostrarProductos;
 }
