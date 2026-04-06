@@ -4,35 +4,61 @@
   <meta charset="UTF-8">
   <title>Catálogo Calzado</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="stylescz.css">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="stylescz.css">
 
 </head>
 <body>
 
 <header class="header">
 
-  <a href="index.html" class="header-left">
-    <img src="assets/logoh.png" alt="Logo FoxLab Co." class="logo">
-  </a>
+    <div class="header-left">
+      <div class="menu-btn" id="menuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <a href="index.html"> <h1 class="logor">FoxLab Co.</h1></a>
+    </div>
 
-  <div class="header-center">
-    <h1>FoxLab Co.</h1>
-  </div>
+    <div class="header-center">
+      <!-- Chips-->
+      <div class="filters">
+        <a href="index.html" class="filter">Home</a>
+        <a href="catalogo.html" class="filter">Foxlab Co.</a>
+        <a class="filter">Apparel</a>
+        <a href="calzado.html" class="filter">Calzado</a>
+        <a href="sport.html" class="filter">Sport</a>
+        <a class="filter">Fragancias</a>
+      </div>
+      <h1 class="logoc">FoxLab Co.</h1>
+    </div>
 
-  <div class="header-right">
+    <div class="header-right">
 
-    <a href="https://instagram.com/foxlabco/" target="_blank">
-      <img src="assets/instagram.png" alt="Instagram">
-    </a>
+      <a href="https://instagram.com/foxlabco/" target="_blank">
+        <img src="assets/instagram.png" alt="Instagram">
+      </a>
 
-    <a href="https://wa.me/573126161008" target="_blank">
-      <img src="assets/whatsapp.png" alt="WhatsApp">
-    </a>
+      <a href="https://wa.me/573126161008" target="_blank">
+        <img src="assets/whatsapp.png" alt="WhatsApp">
+      </a>
 
-  </div>
+    </div>
 
-</header>
+  </header>
+  <!-- MENÚ MOBILE -->
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="catalogo.html">Foxlab Co.</a>
+    <a href="calzado.html">Calzado</a>
+    <a href="apparel.html">Apparel</a>
+    <a href="fragancias.html">Fragancias</a>
+    <a href="sport.html">Sport</a>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
 
 <div class="filtros">
   <select id="filtroCategoria">
@@ -69,6 +95,7 @@
     <a href="https://wa.me/573126161008?text=Hola%20Foxlab%20👋%20quiero%20mi%20página%20web" class="credito">Website desarrollado por Foxlab Studio</a>
   </div>
 </footer>
-<script src="scriptcz.js"></script>
+<script src="main.js"></script>
+<script src="calzado.js"></script>
 </body>
 </html>

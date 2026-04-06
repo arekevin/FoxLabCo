@@ -24,15 +24,8 @@ let indexImagen = 0;
 /* UTILIDADES */
 /* ============================= */
 
-const $ = id => document.getElementById(id);
-const formatoPrecio = num => `$${Number(num).toLocaleString()}`;
-
 function guardarCarrito() {
   localStorage.setItem("carrito", JSON.stringify(carrito));
-}
-
-function limpiarTexto(texto) {
-  return texto?.trim().toLowerCase();
 }
 
 function obtenerCategoriaDesdeURL() {
@@ -41,7 +34,7 @@ function obtenerCategoriaDesdeURL() {
 }
 
 /* cerrar modal al hacer click fuera */
-$("modalImagen").addEventListener("click", function (e) {
+$("modalImagen")?.addEventListener("click", function (e) {
   if (e.target.id === "modalImagen") {
     cerrarModal();
   }
@@ -80,7 +73,6 @@ async function fetchProductos() {
 
 function mostrarProductos(coleccion = "todas", boton = null) {
 
-  // botones activos
   if (boton) {
     document.querySelectorAll(".colecciones button")
       .forEach(btn => btn.classList.remove("active"));
@@ -122,11 +114,8 @@ function renderPagina() {
     card.className = "card";
 
     card.innerHTML = `
-      <img 
-        src="https://res.cloudinary.com/${cloudName}/image/upload/w_600,q_auto,f_webp/${p.Imagen}" 
-        alt="${p.Nombre}" 
-        class="img-producto"
-      >
+      <img src="https://res.cloudinary.com/${cloudName}/image/upload/w_600,q_auto,f_webp/${p.Imagen}" 
+           class="img-producto">
       <h3>${p.Nombre}</h3>
       <div class="precio">${formatoPrecio(p.Precio)}</div>
       <button class="btn-agregar">Agregar al carrito</button>
@@ -141,11 +130,8 @@ function renderPagina() {
     cont.appendChild(card);
   });
 
-  /* paginación */
-
   if (totalPaginas <= 1) {
     paginacion.style.display = "none";
-    return;
   } else {
     paginacion.style.display = "flex";
   }
@@ -176,13 +162,12 @@ function paginaAnterior() {
 }
 
 /* ============================= */
-/* MODAL (MEJORADO 🔥) */
+/* MODAL COMPLETO */
 /* ============================= */
 
 function abrirModal(imgId) {
   imagenBase = imgId;
   indexImagen = 0;
-
   actualizarImagenModal();
   $("modalImagen").classList.add("activo");
 }
@@ -192,14 +177,11 @@ function cerrarModal() {
 }
 
 function obtenerNombreImagen() {
-  return indexImagen === 0
-    ? imagenBase
-    : `${imagenBase}${indexImagen}`;
+  return indexImagen === 0 ? imagenBase : `${imagenBase}${indexImagen}`;
 }
 
 function actualizarImagenModal() {
   const nombre = obtenerNombreImagen();
-
   $("imagenGrande").src =
     `https://res.cloudinary.com/${cloudName}/image/upload/w_1200,q_auto,f_webp/${nombre}`;
 }
@@ -211,11 +193,7 @@ function imagenSiguiente() {
   cargando = true;
 
   const siguienteIndex = indexImagen + 1;
-
-  const nombre = siguienteIndex === 0
-    ? imagenBase
-    : `${imagenBase}${siguienteIndex}`;
-
+  const nombre = siguienteIndex === 0 ? imagenBase : `${imagenBase}${siguienteIndex}`;
   const url = `https://res.cloudinary.com/${cloudName}/image/upload/${nombre}`;
 
   const img = new Image();
@@ -227,7 +205,6 @@ function imagenSiguiente() {
   };
 
   img.onerror = () => {
-    // 🔁 vuelve a la imagen original
     indexImagen = 0;
     $("imagenGrande").src =
       `https://res.cloudinary.com/${cloudName}/image/upload/${imagenBase}`;
@@ -239,13 +216,12 @@ function imagenSiguiente() {
 
 function imagenAnterior() {
   if (indexImagen === 0) return;
-
   indexImagen--;
   actualizarImagenModal();
 }
 
 /* ============================= */
-/* CARRITO */
+/* CARRITO COMPLETO */
 /* ============================= */
 
 function agregarAlCarrito(producto, boton) {
@@ -341,7 +317,7 @@ function actualizarCarritoUI() {
 }
 
 /* ============================= */
-/* CARRITO PANEL */
+/* PANEL CARRITO */
 /* ============================= */
 
 function abrirCarrito() {
@@ -369,9 +345,7 @@ function enviarPedidoWhatsApp() {
     const subtotal = item.Precio * item.cantidad;
     total += subtotal;
 
-    mensaje += `• ${item.Nombre}\n`;
-    mensaje += `  Cantidad: ${item.cantidad}\n`;
-    mensaje += `  Subtotal: ${formatoPrecio(subtotal)}\n\n`;
+    mensaje += `• ${item.Nombre}\nCantidad: ${item.cantidad}\nSubtotal: ${formatoPrecio(subtotal)}\n\n`;
   });
 
   mensaje += `Total: ${formatoPrecio(total)}\n\nMi nombre es:`;
@@ -399,15 +373,6 @@ function enviarPedidoWhatsApp() {
 
     if (categoriaURL && categoriaURL !== "todas") {
       mostrarProductos(categoriaURL);
-      const botones = document.querySelectorAll(".colecciones button");
-
-      botones.forEach(btn => {
-        btn.classList.remove("active");
-
-        if (limpiarTexto(btn.textContent).includes(categoriaURL)) {
-          btn.classList.add("active");
-        }
-      });
     } else {
       productosFiltrados = [...productosGlobal];
       renderPagina();

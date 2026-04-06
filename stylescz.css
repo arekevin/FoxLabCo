@@ -1,64 +1,3 @@
-/* =========================
-   RESET
-========================= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Montserrat,sans-serif;
-}
-
-/* =========================
-   HEADER PREMIUM
-========================= */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 40px;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-  z-index: 1000;
-  transition: all 0.3s ease;
-}
-
-/* LOGO IZQUIERDA */
-.header-left {
-  position: absolute;
-  left: 40px;
-}
-
-.logo {
-  height: 58px;
-  object-fit: contain;
-}
-
-/* ICONOS DERECHA */
-.header-right {
-  position: absolute;
-  right: 40px;
-  display: flex;
-  gap: 20px;
-}
-
-.header-right img {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: all 0.3s ease;
-}
-
-.header-right img:hover {
-  opacity: 1;
-  transform: scale(1.15);
-}
 
 /* =========================
    FILTROS
@@ -67,7 +6,7 @@
   display: flex;
   justify-content: center;
   gap: 15px;
-  padding: 25px;
+  padding: 15px;
   flex-wrap: wrap;
   background: #161616;
 }

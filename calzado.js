@@ -1,10 +1,19 @@
+/* ============================= */
+/* CONFIG */
+/* ============================= */
+
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTs-DZxNCoO7-hnJJNLioavfzWAOlNzj0TqARTMiU1MN5dQIdpzXC4Es7uxGCc-UsKwHg1lzSTfsif6/pub?gid=0&single=true&output=csv";
 const cloudName = "dvzdwcr5m";
+const numeroWhatsApp = "573126161008";
 
 let paginaActual = 1;
 const productosPorPagina = 20;
 
 let productosGlobal = [];
+
+/* ============================= */
+/* FETCH */
+/* ============================= */
 
 async function fetchProductos() {
   const res = await fetch(sheetURL);
@@ -16,20 +25,30 @@ async function fetchProductos() {
   return lines.map(line => {
     const values = line.split(",");
     let obj = {};
+
     headers.forEach((h, i) => {
       obj[h.trim()] = values[i]?.trim();
     });
+
+    obj.Precio = parseInt(obj.Precio) || 0;
+
     return obj;
   });
 }
 
+/* ============================= */
+/* FILTROS */
+/* ============================= */
+
 function llenarFiltros(productos) {
+
   const marcaSet = new Set();
+
   productos.forEach(p => {
     if (p.Marca) marcaSet.add(p.Marca);
   });
 
-  const filtroMarca = document.getElementById("filtroMarca");
+  const filtroMarca = $("filtroMarca");
 
   marcaSet.forEach(marca => {
     const option = document.createElement("option");
@@ -41,20 +60,40 @@ function llenarFiltros(productos) {
 
 function obtenerFiltrados() {
 
-  const cat = document.getElementById("filtroCategoria").value;
-  const mar = document.getElementById("filtroMarca").value;
-  const gen = document.getElementById("filtroGenero").value;
-
-  return productosGlobal.filter(p =>
-    (cat === "todos" || p.Categoria === cat) &&
-    (mar === "todos" || p.Marca === mar) &&
-    (gen === "todos" || p.Genero === gen)
+  let filtrados = productosGlobal.filter(p =>
+    ($("filtroCategoria").value === "todos" || p.Categoria === $("filtroCategoria").value) &&
+    ($("filtroMarca").value === "todos" || p.Marca === $("filtroMarca").value) &&
+    ($("filtroGenero").value === "todos" || p.Genero === $("filtroGenero").value)
   );
+
+  /* ============================= */
+  /* ORDENAMIENTO 🔥 */
+  /* ============================= */
+
+  const orden = $("ordenar")?.value;
+
+  if (orden === "precio-asc") {
+    filtrados.sort((a, b) => a.Precio - b.Precio);
+  }
+
+  if (orden === "precio-desc") {
+    filtrados.sort((a, b) => b.Precio - a.Precio);
+  }
+
+  if (orden === "nombre") {
+    filtrados.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+  }
+
+  return filtrados;
 }
+
+/* ============================= */
+/* RENDER */
+/* ============================= */
 
 function mostrarProductos() {
 
-  const cont = document.getElementById("productos");
+  const cont = $("productos");
   cont.innerHTML = "";
 
   const filtrados = obtenerFiltrados();
@@ -72,13 +111,12 @@ function mostrarProductos() {
     card.classList.add("card");
 
     card.innerHTML = `
-      <img src="https://res.cloudinary.com/${cloudName}/image/upload/v1771981588/${p.Imagen}" alt="${p.Nombre}">
+      <img src="https://res.cloudinary.com/${cloudName}/image/upload/${p.Imagen}" alt="${p.Nombre}">
       <h3>${p.Nombre}</h3>
-      <p>${p.Marca}</p>
       <p>${p.Genero}</p>
-      <div class="precio">$${parseInt(p.Precio || 0).toLocaleString()}</div>
+      <div class="precio">${formatoPrecio(p.Precio)}</div>
       <a class="btn"
-         href="https://wa.me/573126161008?text=Hola, quiero el producto ${encodeURIComponent(p.Nombre)}"
+         href="https://wa.me/${numeroWhatsApp}?text=Hola, quiero el producto ${encodeURIComponent(p.Nombre)}"
          target="_blank">
          Comprar
       </a>
@@ -88,24 +126,29 @@ function mostrarProductos() {
   });
 
   actualizarPaginacion(totalPaginas);
+
   window.scrollTo({
-  top: 0,
-  behavior: "smooth"
-});
+    top: 0,
+    behavior: "smooth"
+  });
 }
+
+/* ============================= */
+/* PAGINACIÓN */
+/* ============================= */
 
 function actualizarPaginacion(totalPaginas) {
 
-  document.getElementById("infoPagina").textContent =
+  $("infoPagina").textContent =
     `Página ${paginaActual} de ${totalPaginas}`;
 
-  document.getElementById("btnAnterior").disabled =
+  $("btnAnterior").disabled =
     paginaActual === 1;
 
-  document.getElementById("btnSiguiente").disabled =
+  $("btnSiguiente").disabled =
     paginaActual === totalPaginas;
 
-  const paginacion = document.getElementById("paginacion");
+  const paginacion = $("paginacion");
 
   if (totalPaginas <= 1) {
     paginacion.style.display = "none";
@@ -130,6 +173,10 @@ function paginaSiguiente() {
   }
 }
 
+/* ============================= */
+/* INIT */
+/* ============================= */
+
 (async () => {
 
   try {
@@ -138,22 +185,12 @@ function paginaSiguiente() {
 
     llenarFiltros(productosGlobal);
 
-    document.getElementById("filtroCategoria")
-      .addEventListener("change", () => {
-        paginaActual = 1;
-        mostrarProductos();
-      });
-
-    document.getElementById("filtroMarca")
-      .addEventListener("change", () => {
-        paginaActual = 1;
-        mostrarProductos();
-      });
-
-    document.getElementById("filtroGenero")
-      .addEventListener("change", () => {
-        paginaActual = 1;
-        mostrarProductos();
+    ["filtroCategoria", "filtroMarca", "filtroGenero", "ordenar"]
+      .forEach(id => {
+        $(id)?.addEventListener("change", () => {
+          paginaActual = 1;
+          mostrarProductos();
+        });
       });
 
     mostrarProductos();
