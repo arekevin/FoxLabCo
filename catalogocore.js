@@ -7,6 +7,7 @@ function iniciarCatalogo(config) {
 
   const cloudName = "dvzdwcr5m";
   const numeroWhatsApp = "573126161008";
+  $("btnAnterior")?.addEventListener("click", paginaAnterior)
 
   let productosGlobal = [];
   let productosFiltrados = [];
@@ -321,7 +322,8 @@ function iniciarCatalogo(config) {
   /* ============================= */
   /* PANEL CARRITO */
   /* ============================= */
-
+  
+  $("carritoicon").addEventListener("click", abrirCarrito);
   function abrirCarrito() {
     $("carritoPanel").classList.add("activo");
     $("carritoOverlay").classList.add("activo");
@@ -389,9 +391,10 @@ function iniciarCatalogo(config) {
   window.mostrarProductos = mostrarProductos;
   window.paginaSiguiente = paginaSiguiente;
   window.paginaAnterior = paginaAnterior;
-  window.abrirCarrito = abrirCarrito;
   window.cerrarCarrito = cerrarCarrito;
   window.cambiarCantidad = cambiarCantidad;
   window.eliminarProducto = eliminarProducto;
   window.enviarPedidoWhatsApp = enviarPedidoWhatsApp;
+  window.imagenSiguiente = imagenSiguiente;
+  window.imagenAnterior = imagenAnterior;
 }

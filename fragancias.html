@@ -28,10 +28,10 @@
       <div class="filters">
         <a href="index.html" class="filter">Home</a>
         <a href="catalogo.html" class="filter">Foxlab Co.</a>
-        <a class="filter">Apparel</a>
+        <a href="esentials.html" class="filter">Apparel</a>
         <a href="calzado.html" class="filter">Calzado</a>
         <a href="sport.html" class="filter">Sport</a>
-        <a class="filter">Fragancias</a>
+        <a href="fragancias.html" class="filter">Fragancias</a>
       </div>
       <h1 class="logoc">FoxLab Co.</h1>
     </div>
@@ -42,7 +42,7 @@
         <img src="assets/whatsapp.png" alt="WhatsApp">
       </a>
 
-      <div class="carrito-icono" onclick="abrirCarrito()">
+      <div id="carritoicon" class="carrito-icono" onclick="abrirCarrito()">
         🛒 <span id="contadorCarrito">0</span>
       </div>
 
@@ -63,13 +63,9 @@
 
 
   <section class="colecciones">
-    <button onclick="mostrarProductos('todas', this)">Todas</button>
-    <button onclick="mostrarProductos('salsa', this)">Salsa&Sazón</button>
-    <button onclick="mostrarProductos('dsc', this)">Diciembre Social Club</button>
-    <button onclick="mostrarProductos('amor', this)">Hecho con amor</button>
-    <button onclick="mostrarProductos('tropical', this)">Tropical Mind</button>
-    <button onclick="mostrarProductos('solar', this)">Sun Vibes</button>
-    <button onclick="mostrarProductos('fox', this)" class="active">Foxlab Dsgn</button>
+    <button onclick="mostrarProductos('todas', this)" class="active">Todas</button>
+    <button onclick="mostrarProductos('dama', this)">dama</button>
+    <button onclick="mostrarProductos('hombre', this)">hombre</button>
   </section>
 
 
@@ -78,8 +74,7 @@
     <div id="productos" class="grid-productos"></div>
 
     <div class="paginacion" id="paginacion">
-      <!-- <button id="btnAnterior" onclick="paginaAnterior()">Anterior</button> -->
-      <button id="btnAnterior">Ant.</button>
+      <button id="btnAnterior" onclick="paginaAnterior()">Anterior</button>
       <span id="infoPagina">Página 1 de 1</span>
       <button id="btnSiguiente" onclick="paginaSiguiente()">Siguiente</button>
     </div>
@@ -113,25 +108,6 @@
 
   </div>
 
-
-  <!-- ESTUDIO CREATIVO -->
-  <section id="estudioCreativo">
-
-    <div class="estudioCreativo">
-      <p>
-        ¿Buscas un diseño a tu medida? Personaliza tus prendas con diseños exclusivos |
-        Foxlab Estudio Creativo 👉
-      </p>
-
-      <button
-        onclick="window.open('https://wa.me/573126161008?text=Hola%20Foxlab%20👋%20quiero%20personalizar%20una%20prenda','_blank')">
-        Personalizar ahora
-      </button>
-    </div>
-
-  </section>
-
-
   <footer class="footer">
 
     <div class="footer-content">
@@ -143,7 +119,8 @@
   </footer>
 
   <script src="main.js"></script>
-  <script src="catalogo.js"></script>
+  <script src="catalogocore.js"></script>
+  <script src="fragancias.js"></script>
 
 </body>
 
