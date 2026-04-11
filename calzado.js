@@ -193,7 +193,13 @@ function paginaSiguiente() {
     mostrarProductos();
   }
 }
+function mostrarLoader() {
+  $("loader")?.classList.add("activo");
+}
 
+function ocultarLoader() {
+  $("loader")?.classList.remove("activo");
+}
 /* ============================= */
 /* INIT */
 /* ============================= */
@@ -202,7 +208,14 @@ function paginaSiguiente() {
 
   try {
 
-    productosGlobal = await fetchProductos();
+      mostrarLoader(); // 🔥 ACTIVAR LOADER
+
+    const [data] = await Promise.all([
+      fetchProductos(),
+      new Promise(r => setTimeout(r, 500)) // 🔥 para que sí se vea
+    ]);
+
+    productosGlobal = data;
 
     llenarFiltros(productosGlobal);
 
@@ -215,6 +228,7 @@ function paginaSiguiente() {
       });
 
     mostrarProductos();
+    ocultarLoader();
 
   } catch (error) {
     console.error("Error cargando productos:", error);

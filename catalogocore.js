@@ -379,7 +379,7 @@ function iniciarCatalogo(config) {
   (async function init() {
   try {
 
-    mostrarLoader(); // 🔥 AQUÍ
+    mostrarLoader(); // 🔥 mostrar antes de cargar
 
     productosGlobal = await fetchProductos();
 
@@ -392,14 +392,16 @@ function iniciarCatalogo(config) {
       renderPagina();
     }
 
-    ocultarLoader(); // 🔥 AQUÍ
+    ocultarLoader(); // 🔥 ocultar después
 
     actualizarCarritoUI();
 
   } catch (err) {
     console.error("Error cargando productos:", err);
+    ocultarLoader(); // 🔥 por si falla
   }
 })();
+
   window.mostrarProductos = mostrarProductos;
   window.paginaSiguiente = paginaSiguiente;
   window.paginaAnterior = paginaAnterior;

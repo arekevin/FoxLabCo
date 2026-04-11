@@ -360,13 +360,22 @@ function enviarPedidoWhatsApp() {
   actualizarCarritoUI();
   cerrarCarrito();
 }
+function mostrarLoader() {
+  $("loader")?.classList.add("activo");
+}
 
+function ocultarLoader() {
+  $("loader")?.classList.remove("activo");
+}
 /* ============================= */
 /* INIT */
 /* ============================= */
 
 (async function init() {
   try {
+
+    mostrarLoader(); // 🔥 mostrar loader
+
     productosGlobal = await fetchProductos();
 
     const categoriaURL = obtenerCategoriaDesdeURL();
@@ -378,9 +387,12 @@ function enviarPedidoWhatsApp() {
       renderPagina();
     }
 
+    ocultarLoader(); // 🔥 ocultar loader
+
     actualizarCarritoUI();
 
   } catch (err) {
     console.error("Error cargando productos:", err);
+    ocultarLoader(); // 🔥 por si falla
   }
 })();
