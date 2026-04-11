@@ -26,6 +26,13 @@ function iniciarCatalogo(config) {
   /* ============================= */
   /* UTILIDADES */
   /* ============================= */
+  function mostrarLoader() {
+    $("loader")?.classList.add("activo");
+  }
+
+  function ocultarLoader() {
+    $("loader")?.classList.remove("activo");
+  }
 
   function guardarCarrito() {
     localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -322,7 +329,7 @@ function iniciarCatalogo(config) {
   /* ============================= */
   /* PANEL CARRITO */
   /* ============================= */
-  
+
   $("carritoicon").addEventListener("click", abrirCarrito);
   function abrirCarrito() {
     $("carritoPanel").classList.add("activo");
@@ -370,24 +377,29 @@ function iniciarCatalogo(config) {
   /* ============================= */
 
   (async function init() {
-    try {
-      productosGlobal = await fetchProductos();
+  try {
 
-      const categoriaURL = obtenerCategoriaDesdeURL();
+    mostrarLoader(); // 🔥 AQUÍ
 
-      if (categoriaURL && categoriaURL !== "todas") {
-        mostrarProductos(categoriaURL);
-      } else {
-        productosFiltrados = [...productosGlobal];
-        renderPagina();
-      }
+    productosGlobal = await fetchProductos();
 
-      actualizarCarritoUI();
+    const categoriaURL = obtenerCategoriaDesdeURL();
 
-    } catch (err) {
-      console.error("Error cargando productos:", err);
+    if (categoriaURL && categoriaURL !== "todas") {
+      mostrarProductos(categoriaURL);
+    } else {
+      productosFiltrados = [...productosGlobal];
+      renderPagina();
     }
-  })();
+
+    ocultarLoader(); // 🔥 AQUÍ
+
+    actualizarCarritoUI();
+
+  } catch (err) {
+    console.error("Error cargando productos:", err);
+  }
+})();
   window.mostrarProductos = mostrarProductos;
   window.paginaSiguiente = paginaSiguiente;
   window.paginaAnterior = paginaAnterior;

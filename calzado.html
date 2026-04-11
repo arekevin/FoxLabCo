@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Catálogo Calzado</title>
@@ -8,9 +9,10 @@
   <link rel="stylesheet" href="stylescz.css">
 
 </head>
+
 <body>
 
-<header class="header">
+  <header class="header">
 
     <div class="header-left">
       <div class="menu-btn" id="menuBtn">
@@ -18,7 +20,9 @@
         <span></span>
         <span></span>
       </div>
-      <a href="index.html"> <h1 class="logor">FoxLab Co.</h1></a>
+      <a href="index.html">
+        <h1 class="logor">FoxLab Co.</h1>
+      </a>
     </div>
 
     <div class="header-center">
@@ -56,42 +60,47 @@
   <div class="overlay" id="overlay"></div>
 
 
-<div class="filtros">
-  <select id="filtroCategoria">
-    <option value="todos">Todas las categorías</option>
-    <option value="Zapatos">Zapatos</option>
-    <option value="Camisetas">Camisetas</option>
-  </select>
+  <div class="filtros">
+    <select id="filtroCategoria">
+      <option value="todos">Todas las categorías</option>
+      <option value="Zapatos">Zapatos</option>
+      <option value="Camisetas">Camisetas</option>
+    </select>
 
-  <select id="filtroMarca">
-    <option value="todos">Todas las marcas</option>
-  </select>
+    <select id="filtroMarca">
+      <option value="todos">Todas las marcas</option>
+    </select>
 
-  <select id="filtroGenero">
-    <option value="todos">Todos los géneros</option>
-    <option value="Hombre">Hombre</option>
-    <option value="Dama">Dama</option>
-    <option value="Unisex">Unisex</option>
-  </select>
-</div>
-<main>
-  <div id="productos" class="grid-productos"></div>
-
-  <div class="paginacion" id="paginacion">
-    <button id="btnAnterior" onclick="paginaAnterior()">Anterior</button>
-    <span id="infoPagina">Página 1 de 1</span>
-    <button id="btnSiguiente" onclick="paginaSiguiente()">Siguiente</button>
+    <select id="filtroGenero">
+      <option value="todos">Todos los géneros</option>
+      <option value="Hombre">Hombre</option>
+      <option value="Dama">Dama</option>
+      <option value="Unisex">Unisex</option>
+    </select>
   </div>
-</main>
+  <main>
+    <div id="loader" class="loader">
+      <p>Cargando productos...</p>
+    </div>
+    <div id="productos" class="grid-productos"></div>
 
-<footer class="footer">
-  <div class="footer-content">
-    <h1>FoxLab Co.</h1>
-    <p>© Todos los derechos reservados.</p>
-    <a href="https://wa.me/573126161008?text=Hola%20Foxlab%20👋%20quiero%20mi%20página%20web" class="credito">Website desarrollado por Foxlab Studio</a>
-  </div>
-</footer>
-<script src="main.js"></script>
-<script src="calzado.js"></script>
+    <div class="paginacion" id="paginacion">
+      <button id="btnAnterior" onclick="paginaAnterior()">Anterior</button>
+      <span id="infoPagina">Página 1 de 1</span>
+      <button id="btnSiguiente" onclick="paginaSiguiente()">Siguiente</button>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <h1>FoxLab Co.</h1>
+      <p>© Todos los derechos reservados.</p>
+      <a href="https://wa.me/573126161008?text=Hola%20Foxlab%20👋%20quiero%20mi%20página%20web" class="credito">Website
+        desarrollado por Foxlab Studio</a>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+  <script src="calzado.js"></script>
 </body>
+
 </html>

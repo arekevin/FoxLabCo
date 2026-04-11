@@ -60,15 +60,36 @@ function llenarFiltros(productos) {
 
 function obtenerFiltrados() {
 
-  let filtrados = productosGlobal.filter(p =>
-    ($("filtroCategoria").value === "todos" || p.Categoria === $("filtroCategoria").value) &&
-    ($("filtroMarca").value === "todos" || p.Marca === $("filtroMarca").value) &&
-    ($("filtroGenero").value === "todos" || p.Genero === $("filtroGenero").value)
-  );
+  const categoria = $("filtroCategoria").value;
+  const marca = $("filtroMarca").value;
+  const genero = $("filtroGenero").value;
 
-  /* ============================= */
+  let filtrados = productosGlobal.filter(p => {
+
+    const categoriaOK =
+      categoria === "todos" || p.Categoria === categoria;
+
+    const marcaOK =
+      marca === "todos" || p.Marca === marca;
+
+    let generoOK = true;
+
+    if (genero !== "todos") {
+
+      if (genero === "Hombre" || genero === "Dama") {
+        generoOK =
+          p.Genero === genero ||
+          p.Genero === "Unisex";
+      } else {
+        generoOK = p.Genero === genero;
+      }
+
+    }
+
+    return categoriaOK && marcaOK && generoOK;
+  });
+
   /* ORDENAMIENTO 🔥 */
-  /* ============================= */
 
   const orden = $("ordenar")?.value;
 

@@ -67,10 +67,15 @@
     <button onclick="mostrarProductos('sport', this)">Sport</button>
     <button onclick="mostrarProductos('ligas', this)">Club</button>
     <button onclick="mostrarProductos('seleccion', this)">Seleccion</button>
+    <button onclick="mostrarProductos('varios', this)">Varios</button>
   </section>
 
 
   <main>
+<div id="loader" class="loader">
+      <p>Cargando productos...</p>
+    </div>
+    <div id="productos" class="grid-productos"></div>
 
     <div id="productos" class="grid-productos"></div>
 
