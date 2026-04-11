@@ -397,4 +397,5 @@ function iniciarCatalogo(config) {
   window.enviarPedidoWhatsApp = enviarPedidoWhatsApp;
   window.imagenSiguiente = imagenSiguiente;
   window.imagenAnterior = imagenAnterior;
+  window.cerrarModal = cerrarModal;
 }
