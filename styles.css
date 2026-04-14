@@ -98,6 +98,7 @@ a, a:visited, a:active{
 
 .header-right img:hover {
   transform: scale(1.1);
+  transform: translate(-4px);
 }
 
 .loader {
@@ -347,14 +348,14 @@ button,
   text-align: center;
   box-shadow: 0 5px 20px rgba(0, 0, 0, .05);
   transition: var(--transition);
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp .5s ease forwards;
+  opacity: 1;
+  transform: translateY(0);
   color: #d4a373;
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .1);
 }
 
 .card img {
@@ -366,9 +367,6 @@ button,
   transition: transform .4s ease;
 }
 
-.card:hover img {
-  transform: scale(1.05);
-}
 
 .card h3 {
   font-size: 14px;
@@ -579,6 +577,8 @@ button,
   max-width: 90%;
   max-height: 85%;
   border-radius: 20px;
+  position: relative;
+  z-index: 9999;
 }
 
 .cerrar-modal {
@@ -590,7 +590,36 @@ button,
   cursor: pointer;
 }
 
+.modal-prev, .modal-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* Centra verticalmente */
+  color: white; 
+  border: none;
+  font-size: 50px; /* Tamaño más grande */
+  padding:0px;
+  cursor: pointer;
+  border-radius: 50%; /* Los hace circulares */
+  transition: background 0.3s ease;
+  z-index: 10001; /* Por encima de la imagen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
 
+.modal-prev:hover, .modal-next:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Posicionamiento individual */
+.modal-prev {
+  left: 5%; /* Ajusta qué tan al centro quieres que entren */
+}
+
+.modal-next {
+  right: 5%;
+}
 /* ============================= */
 /* HOME */
 /* ============================= */
