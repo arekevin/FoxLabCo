@@ -561,6 +561,7 @@ button,
 
 body.modal-abierto {
   overflow: hidden;
+  position: fixed;
 }
 .modal-imagen {
   position: fixed;
