@@ -44,9 +44,12 @@ body {
   padding-top: 0;
 }
 
-a, a:visited, a:active{
-  text-decoration: none; /* Quita el subrayado */
-  color: inherit;  
+a,
+a:visited,
+a:active {
+  text-decoration: none;
+  /* Quita el subrayado */
+  color: inherit;
 }
 
 /* ============================= */
@@ -59,7 +62,7 @@ a, a:visited, a:active{
   width: 100%;
   height: 75px;
 
-  background: rgba(13,13,13,0.9);
+  background: rgba(13, 13, 13, 0.9);
   backdrop-filter: blur(10px);
 
   display: flex;
@@ -76,7 +79,7 @@ a, a:visited, a:active{
   align-items: center;
 }
 
-.header-left h1{
+.header-left h1 {
   font-size: 1.2rem;
   color: #fff;
 }
@@ -117,125 +120,126 @@ a, a:visited, a:active{
 /* ============================= */
 
 .btn {
-      background: #d4a373;
-      color: #000;
-      padding: 10px 22px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-block;
-      transition: .3s;
-    } 
+  background: #d4a373;
+  color: #000;
+  padding: 10px 22px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: .3s;
+}
 
-.filters{
-  display:flex;
-  gap:8px;
+.filters {
+  display: flex;
+  gap: 8px;
 
-  overflow-x:auto;
-  white-space:nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
 
-  max-width:100%;
+  max-width: 100%;
 }
 
 /* evitar que se rompan */
-.filter{
-  flex:0 0 auto;
+.filter {
+  flex: 0 0 auto;
 
-  padding:6px 14px;
-  border-radius:20px;
+  padding: 6px 14px;
+  border-radius: 20px;
 
-  border:1px solid rgba(255,255,255,0.1);
-  background:transparent;
-  color:#ddd;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: #ddd;
 
-  font-size:0.8rem;
-  text-decoration:none;
+  font-size: 0.8rem;
+  text-decoration: none;
 
-  transition:.3s;
+  transition: .3s;
 }
 
-.filter:hover{
-  background:rgba(255,255,255,0.08);
-  color:#fff;
+.filter:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
 }
 
-.filter.active{
-  background:#D4A373;
-  color:#000;
-  border:none;
-  font-weight:500;
+.filter.active {
+  background: #D4A373;
+  color: #000;
+  border: none;
+  font-weight: 500;
 }
 
 /* ============================= */
 /* HAMBURGUESA */
 /* ============================= */
 
-.menu-btn{
-  display:none;
-  width:30px;
-  height:22px;
-  flex-direction:column;
-  justify-content:space-between;
-  cursor:pointer;
+.menu-btn {
+  display: none;
+  width: 30px;
+  height: 22px;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
 }
-.logoc{
+
+.logoc {
   display: none;
 }
 
-.menu-btn span{
-  height:3px;
-  background:#fff;
-  border-radius:2px;
-  transition:.3s;
+.menu-btn span {
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+  transition: .3s;
 }
 
 /* ============================= */
 /* MENÚ MOBILE */
 /* ============================= */
 
-.mobile-menu{
-  position:fixed;
-  top:0;
-  left:-100%;
-  width:75%;
-  height:100%;
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 75%;
+  height: 100%;
 
-  background:#0D0D0D;
-  padding:80px 20px;
+  background: #0D0D0D;
+  padding: 80px 20px;
 
-  display:flex;
-  flex-direction:column;
-  gap:20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
-  transition:.3s;
-  z-index:999;
+  transition: .3s;
+  z-index: 999;
 }
 
-.mobile-menu a{
-  color:#fff;
-  text-decoration:none;
-  font-size:1.2rem;
-  border-bottom:1px solid rgba(255,255,255,0.1);
-  padding-bottom:10px;
+.mobile-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
 }
 
-.mobile-menu.active{
-  left:0;
+.mobile-menu.active {
+  left: 0;
 }
 
 /* OVERLAY */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.5);
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: .3s;
 }
 
-.overlay.active{
-  opacity:1;
-  pointer-events:all;
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 
@@ -555,6 +559,9 @@ button,
 /* MODAL */
 /* ============================= */
 
+body.modal-abierto {
+  overflow: hidden;
+}
 .modal-imagen {
   position: fixed;
   inset: 0;
@@ -590,36 +597,44 @@ button,
   cursor: pointer;
 }
 
-.modal-prev, .modal-next {
+.modal-prev,
+.modal-next {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%); /* Centra verticalmente */
-  color: white; 
+  transform: translateY(-50%);
+  /* Centra verticalmente */
+  color: white;
   border: none;
-  font-size: 50px; /* Tamaño más grande */
-  padding:0px;
+  font-size: 50px;
+  /* Tamaño más grande */
+  padding: 0px;
   cursor: pointer;
-  border-radius: 50%; /* Los hace circulares */
+  border-radius: 50%;
+  /* Los hace circulares */
   transition: background 0.3s ease;
-  z-index: 10001; /* Por encima de la imagen */
+  z-index: 10001;
+  /* Por encima de la imagen */
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 0;
 }
 
-.modal-prev:hover, .modal-next:hover {
+.modal-prev:hover,
+.modal-next:hover {
   background: rgba(255, 255, 255, 0.4);
 }
 
 /* Posicionamiento individual */
 .modal-prev {
-  left: 5%; /* Ajusta qué tan al centro quieres que entren */
+  left: 5%;
+  /* Ajusta qué tan al centro quieres que entren */
 }
 
 .modal-next {
   right: 5%;
 }
+
 /* ============================= */
 /* HOME */
 /* ============================= */
@@ -701,6 +716,24 @@ button,
 /* FOOTER */
 /* ============================= */
 
+.explora {
+  display: none;
+  padding: 10px;
+}
+
+.bt {
+  background-color: rgb(232, 232, 219);
+  margin: auto;
+  color: var(--color-text);
+  padding: 8px 15px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: .3s;
+  cursor: pointer;
+}
+
 .footer {
   background: #111;
   color: white;
@@ -764,20 +797,22 @@ button,
     font-size: large;
   }
 
-    /* OCULTAR CHIPS */
-  .filters{
-    display:none;
-  }
-  .logoc{
-    display:flex;
-  }
-  .logor{
+  /* OCULTAR CHIPS */
+  .filters {
     display: none;
   }
 
-   /* MOSTRAR HAMBURGUESA */
-  .menu-btn{
-    display:flex;
+  .logoc {
+    display: flex;
+  }
+
+  .logor {
+    display: none;
+  }
+
+  /* MOSTRAR HAMBURGUESA */
+  .menu-btn {
+    display: flex;
   }
 
   .header {
@@ -800,6 +835,11 @@ button,
 
   .logo {
     height: 45px
+  }
+
+
+  .explora {
+    display: flex;
   }
 
 }

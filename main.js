@@ -24,14 +24,20 @@ links.forEach(link => {
 /* ============================= */
 
 const menuBtn = document.getElementById("menuBtn");
+const discoverBtn = document.getElementById("dBtn");
 const mobileMenu = document.getElementById("mobileMenu");
 const overlay = document.getElementById("overlay");
 
-if (menuBtn && mobileMenu && overlay) {
+if (menuBtn && mobileMenu && overlay && discoverBtn) {
   menuBtn.addEventListener("click", () => {
     mobileMenu.classList.toggle("active");
     overlay.classList.toggle("active");
   });
+
+ discoverBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    overlay.classList.toggle("active");
+  }); 
 
   overlay.addEventListener("click", () => {
     mobileMenu.classList.remove("active");

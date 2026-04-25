@@ -1,9 +1,38 @@
 function iniciarCatalogo(config) {
 
   const sheetURL = config.sheetURL;
+
+  /* ============================= */
+/* SOPORTE TOUCH (SWIPE) PARA MODAL */
+/* ============================= */
+let touchstartX = 0;
+let touchendX = 0;
+
+const modalElem = $("modalImagen");
+
+if (modalElem) {
+  modalElem.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  modalElem.addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX;
+    
+    const diferencia = touchstartX - touchendX;
+    if (Math.abs(diferencia) > 50) { // Umbral de 50px
+      if (diferencia > 0) {
+        imagenSiguiente();
+      } else {
+        imagenAnterior();
+      }
+    }
+  }, { passive: true });
+}
+
   /* ============================= */
   /* CONFIG */
   /* ============================= */
+
 
   const cloudName = "dvzdwcr5m";
   const numeroWhatsApp = "573126161008";
@@ -180,10 +209,12 @@ function iniciarCatalogo(config) {
     indexImagen = 0;
     actualizarImagenModal();
     $("modalImagen").classList.add("activo");
+    document.body.classList.add("modal-abierto"); // Blockscroll
   }
 
   function cerrarModal() {
     $("modalImagen").classList.remove("activo");
+    document.body.classList.remove("modal-abierto"); // Blockscroll
   }
 
   function obtenerNombreImagen() {
@@ -225,9 +256,11 @@ function iniciarCatalogo(config) {
   }
 
   function imagenAnterior() {
-    if (indexImagen === 0) return;
+    if (indexImagen > 0) {
     indexImagen--;
     actualizarImagenModal();
+  }
+    
   }
 
   /* ============================= */
