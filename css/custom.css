@@ -26,7 +26,7 @@ body{
   align-items:center;
   text-align:center;
   gap:20px;
-  background: url('assets/custom.png') center/cover no-repeat;
+  background: url('/assets/custom.png') center/cover no-repeat;
   position: relative;
 }
 

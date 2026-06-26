@@ -6,8 +6,8 @@
   <title>Foxlab Co. | Catálogo Oficial</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Colecciones oficiales de Foxlab Co. Compra y personaliza tus prendas favoritas.">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" href="/favicon.ico">
 </head>
 
 <body>
@@ -20,20 +20,18 @@
         <span></span>
         <span></span>
       </div>
-      <a href="index.html">
-        <h1 class="logor">FoxLab Co.</h1>
-      </a>
+      <a href="/index.html"> <h1 class="logor">FoxLab Co.</h1></a>
     </div>
 
     <div class="header-center">
       <!-- Chips-->
       <div class="filters">
-        <a href="index.html" class="filter">Home</a>
-        <a href="catalogo.html" class="filter">Foxlab Co.</a>
-        <a href="esentials.html" class="filter">Apparel</a>
-        <a href="calzado.html" class="filter">Calzado</a>
-        <a href="sport.html" class="filter">Sport</a>
-        <a href="fragancias.html" class="filter">Fragancias</a>
+        <a href="/index.html" class="filter">Home</a>
+        <a href="/html/catalogo.html" class="filter">Foxlab Co.</a>
+        <a href="/html/esentials.html" class="filter">Apparel</a>
+        <a href="/html/calzado.html" class="filter">Calzado</a>
+        <a href="/html/sport.html" class="filter">Sport</a>
+        <a href="/html/fragancias.html" class="filter">Fragancias</a>
       </div>
       <h1 class="logoc">FoxLab Co.</h1>
     </div>
@@ -41,10 +39,10 @@
     <div class="header-right">
 
       <a href="https://wa.me/573126161008" target="_blank">
-        <img src="assets/whatsapp.png" alt="WhatsApp">
+        <img src="/assets/whatsapp.png" alt="WhatsApp">
       </a>
 
-      <div class="carrito-icono" onclick="abrirCarrito()">
+      <div id="carritoicon" class="carrito-icono" onclick="abrirCarrito()">
         🛒 <span id="contadorCarrito">0</span>
       </div>
 
@@ -53,33 +51,26 @@
   </header>
   <!-- MENÚ MOBILE -->
   <nav class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a>
-    <a href="catalogo.html">Foxlab Co.</a>
-    <a href="calzado.html">Calzado</a>
-    <a href="esentials.html">Apparel</a>
-    <a href="fragancias.html">Fragancias</a>
-    <a href="sport.html">Sport</a>
+    <a href="/index.html">Home</a>
+    <a href="/html/catalogo.html">Foxlab Co.</a>
+    <a href="/html/calzado.html">Calzado</a>
+    <a href="/html/esentials.html">Apparel</a>
+    <a href="/html/fragancias.html">Fragancias</a>
+    <a href="/html/sport.html">Sport</a>
   </nav>
 
   <div class="overlay" id="overlay"></div>
 
 
   <section class="colecciones">
-    <button onclick="mostrarProductos('todas', this)">Todas</button>
-    <button onclick="mostrarProductos('fox', this)" class="active">Foxlab Dsgn</button>
-    <button onclick="mostrarProductos('salsa', this)">Salsa&Sazón</button>
-    <button onclick="mostrarProductos('dsc', this)">Diciembre Social Club</button>
-    <button onclick="mostrarProductos('amor', this)">Hecho con amor</button>
-    <button onclick="mostrarProductos('tropical', this)">Tropical Mind</button>
-    <button onclick="mostrarProductos('solar', this)">Sun Vibes</button>
-    <button onclick="mostrarProductos('tb', this)">Totebags</button>
+    <button onclick="mostrarProductos('todas', this)" class="active">Todas</button>
+    <button onclick="mostrarProductos('jogg', this)">Joggers</button>
+    <button onclick="mostrarProductos('uw', this)">Interior</button>
+    <button onclick="mostrarProductos('pant', this)">Pants</button>
   </section>
 
 
   <main>
-    <div id="loader" class="loader">
-      <p>Cargando productos...</p>
-    </div>
 
     <div id="productos" class="grid-productos"></div>
 
@@ -118,23 +109,6 @@
 
   </div>
 
-
-  <!-- ESTUDIO CREATIVO -->
-  <section id="estudioCreativo">
-
-    <div class="estudioCreativo">
-      <p>
-        ¿Buscas un diseño a tu medida? Personaliza tus prendas con diseños exclusivos |
-        Foxlab Estudio Creativo 👉
-      </p>
-
-      <a class="btn" href="custom.html">
-        Personalizar ahora
-      </a>
-    </div>
-
-  </section>
-
   <div class="explora">
     <a class="bt" id="dBtn">Explora más productos ✨</a>
   </div>
@@ -142,15 +116,16 @@
   <footer class="footer">
 
     <div class="footer-content">
-      <img src="assets/logof.png" alt="Foxlab Logo" class="footer-logo">
+      <img src="/assets/logof.png" alt="Foxlab Logo" class="footer-logo">
       <p>© 2026 Foxlab Co. Todos los derechos reservados.</p>
       <p class="credito">Website desarrollado por Foxlab Studio</p>
     </div>
 
   </footer>
 
-  <script src="main.js"></script>
-  <script src="catalogo.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/core.js"></script>
+  <script src="/js/esentials.js"></script>
 
 </body>
 

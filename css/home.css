@@ -38,7 +38,7 @@
 
     .hero {
       height: 90vh;
-      background: url('assets/hero.png') center/cover no-repeat;
+      background: url('/assets/hero.png') center/cover no-repeat;
       display: flex;
       align-items: center;
       border-radius: var(--radius);
@@ -300,16 +300,28 @@
       opacity: 0.8;
     }
 
-    /*Responsive*/
+    /* Responsive */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
 
-    @media(max-width:768px) {
-      .categories-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-      }
+  .brand {
+    grid-template-columns: 1fr;
+  }
 
-      .categories-grid>* {
-        grid-column: auto !important;
-        grid-row: auto !important;
-      }
-    }
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    grid-template-rows: repeat(3, 180px);  /* 3 filas */
+    gap: 15px;
+  }
+
+  /* quitar posiciones manuales del layout desktop */
+  .categories-grid > * {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    height: 180px !important;
+    align-self: stretch !important;
+  }
+}
+      
